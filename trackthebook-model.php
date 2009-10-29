@@ -96,6 +96,16 @@ if (!class_exists("TrackTheBookModel")) {
 			return $wpdb->get_results($sql);			
 		}
 		
+		function getAllRows() {
+			global $wpdb;
+			
+			$table_name = $wpdb->trackthebookdb;
+
+			$sql = "SELECT * from " . $table_name;
+			
+			return $wpdb->get_results($sql,'ARRAY_N');	
+		}
+		
 		/**
 		 * Detect if coordinates are unique
 		 * @param $coords

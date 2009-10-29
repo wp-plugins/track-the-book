@@ -33,15 +33,15 @@ if (!class_exists("TrackTheBookAdmin")) {
 		/**
 		 * Render the dashboard stats widget
 		 */
-		function dashboardStats() {
-			TrackTheBookView::render('dashboard-stats');
+		function dashboard() {
+			TrackTheBookView::render('dashboard');
 		}
 		
 		/**
 		 * Add widgets to the dashboard
 		 */
 		function addDashboardWidgets() {
-			wp_add_dashboard_widget('ttb_dashboard_stats', 'Track The Book Stats', array($this,'dashboardStats'));
+			wp_add_dashboard_widget('ttb_dashboard', 'Track The Book', array($this,'dashboard'));
 		}
 	}
 }
