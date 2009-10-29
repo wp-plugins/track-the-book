@@ -29,6 +29,20 @@ if (!class_exists("TrackTheBookAdmin")) {
 
 			return $links;
 		}
+		
+		/**
+		 * Render the dashboard stats widget
+		 */
+		function dashboardStats() {
+			TrackTheBookView::render('dashboard-stats');
+		}
+		
+		/**
+		 * Add widgets to the dashboard
+		 */
+		function addDashboardWidgets() {
+			wp_add_dashboard_widget('ttb_dashboard_stats', 'Track The Book Stats', array($this,'dashboardStats'));
+		}
 	}
 }
 

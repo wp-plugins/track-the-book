@@ -115,6 +115,54 @@ if (!class_exists("TrackTheBookModel")) {
 				return true;
 			}		
 		}
+		
+		/**
+		 * Get a count of the total registered books
+		 */
+		function getTotalRegistered() {
+			global $wpdb;
+			
+			$table_name = $wpdb->trackthebookdb;
+
+			$total_registered = $wpdb->get_var("SELECT count(id) from " . $table_name);
+			
+			return $total_registered;
+		}
+		
+		/**
+		 * Get an array of the books that have been passed the most
+		 */
+		function getMostPassed() {
+			global $wpdb;
+			
+			$table_name = $wpdb->trackthebookdb;
+
+			$results = $wpdb->get_results("SELECT book,COUNT(*) as times_passed from " . $table_name . " 
+											GROUP BY book 
+											HAVING COUNT(book) > 1
+											ORDER BY COUNT(*) DESC");
+			
+			$most_passed = array();
+			$max_count = 1;
+			foreach ($results as $row) {
+				$book = $row->book;
+				$times_passed = $row->times_passed - 1; // Subtract 1 to not including the first time a book is registered
+				
+				if ($max_count > $times_passed) {
+					break;
+				}
+				
+				$most_passed[$book] = $times_passed; 
+				
+				$max_count = $times_passed;
+			}
+			
+			if (empty($most_passed)) {
+				$most_passed = __('No books have been passed.');
+			}
+			
+			return $most_passed;
+		}
 	}
 }
 

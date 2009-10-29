@@ -345,5 +345,7 @@ add_shortcode( 'trackthebook', array($trackthebook_view,'shortcodeRegisterLink')
 add_action('admin_menu', array($trackthebook_admin,'adminMenu'));
 add_filter('plugin_row_meta',array($trackthebook_admin,'pluginShortcuts') ,10,2);
 
+// Dashboard
+add_action('wp_dashboard_setup', array($trackthebook_admin,'addDashboardWidgets'));
 
 ?>
