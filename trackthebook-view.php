@@ -36,12 +36,10 @@ if (!class_exists("TrackTheBookView")) {
 		}
 		
 		/**
-		 * Coverts [track_the_book] into a register link
+		 * Coverts [trackthebook] into a register link
 		 */
 		function shortcodeRegisterLink($atts, $content=null, $code="") {
 			global $trackthebook;
-			
-			$trackthebook_register_page_id = 17;
 			
 			if (empty($content)) {
 				$content = __('Register my book');
@@ -55,6 +53,20 @@ if (!class_exists("TrackTheBookView")) {
 			}
 			
 			return $register_link;
+		}
+		
+		/**
+		 * Coverts [trackthebook_filters] into a display of filters
+		 */
+		function shortcodeFilters($atts, $content=null, $code="") {
+			global $trackthebook;
+			
+			ob_start();
+			$this->render('filter');
+			$filters_code = ob_get_contents();
+			ob_end_clean();
+			
+			return $filters_code;
 		}
 
 	}

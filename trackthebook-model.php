@@ -96,6 +96,10 @@ if (!class_exists("TrackTheBookModel")) {
 			return $wpdb->get_results($sql);			
 		}
 		
+		/**
+		 * Get a list of each row in the database. Used to generate the CSV file.
+		 * @return numeric array of each row
+		 */
 		function getAllRows() {
 			global $wpdb;
 			
@@ -104,6 +108,32 @@ if (!class_exists("TrackTheBookModel")) {
 			$sql = "SELECT * from " . $table_name;
 			
 			return $wpdb->get_results($sql,'ARRAY_N');	
+		}
+		
+		/**
+		 * Get all rows for a specific book number
+		 */
+		function getBookByNumber($book) {
+			global $wpdb;
+			
+			$table_name = $wpdb->trackthebookdb;
+
+			$sql = "SELECT location, date_added from " . $table_name . " WHERE book = '" . $book . "' ORDER BY date_added";
+			
+			return $wpdb->get_results($sql);	
+		}
+		
+		/**
+		 * Get a list of each unique registered book
+		 */
+		function getUniqueBooks() {
+			global $wpdb;
+			
+			$table_name = $wpdb->trackthebookdb;
+
+			$sql = "SELECT DISTINCT book from " . $table_name . " ORDER BY book";
+			
+			return $wpdb->get_col($sql);	
 		}
 		
 		/**

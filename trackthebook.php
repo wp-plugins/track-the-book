@@ -203,6 +203,26 @@ if (!class_exists("TrackTheBook")) {
 		}
 		
 		/**
+		 * Replace all instances of [trackthebook_kml] with the dynamic KML address
+		 */
+		function kmlUrl($content) {
+			$kml_url = get_option('siteurl') . '/?view=trackthebook.kml';
+			
+			// Get filters
+			$book = $_GET['book'];
+			if (!empty($book)) {
+				$kml_url .= '&book=' . $book;
+			}
+			
+			// Add time to insure that it does not cache the KML page
+			$kml_url .= '&nocache=' . time();
+			
+			$content = preg_replace('#\[trackthebook_kml\]#i', $kml_url, $content);
+			
+			return $content;
+		}
+		
+		/**
 		 * Used by the getRealIPAddress function, to test if an IP Address is valid
 		 */
 		function validIPAddress($ip) {
@@ -340,6 +360,8 @@ register_activation_hook(__FILE__,array($trackthebook_model,'install'));
 
 // Add Shortcodes
 add_shortcode( 'trackthebook', array($trackthebook_view,'shortcodeRegisterLink') );
+add_shortcode( 'trackthebook_filters', array($trackthebook_view,'shortcodeFilters') );
+add_filter('the_content', array($trackthebook,'kmlUrl'), 1); // Add a special exception for generating the KML url in a fashion that will work with other shortcodes
 
 // Admin Hooks
 add_action('admin_menu', array($trackthebook_admin,'adminMenu'));

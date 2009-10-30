@@ -22,7 +22,7 @@ if (!function_exists('add_action'))
       <description>
         <![CDATA[
         <?php echo $placemark->location; ?><br />
-		Added on <?php echo date(TTB_DATE_FORMAT,strtotime($placemark->date_added)); ?>
+		<?php echo __('Added on ') . date(TTB_DATE_FORMAT,strtotime($placemark->date_added)); ?>
         ]]>
       </description>
       <Point>

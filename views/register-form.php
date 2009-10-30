@@ -52,12 +52,13 @@
 	display: none;
 }
 </style>
-<div class="wrap trackthebook"><?php    echo "<h2>" . __('Register My Book') . "</h2>"; ?>
+<div class="wrap trackthebook">
+<h2><?php _e('Register My Book'); ?></h2>
 <br />
 <div id="location_note"></div>
 <div id="notification"></div>
 <form id="trackthebook_register" method="post">
-<p class="required"><span class="highlight">*</span> denotes a required field</p>
+<p class="required"><span class="highlight">*</span> <?php _e('denotes a required field'); ?></p>
 <input type="hidden" name="action" id="action" value="register_my_book" />
 <input type="hidden" name="coords" id="coords" value="" />
 <input type="hidden" name="simplified_location" id="simplified_location" value="" />
