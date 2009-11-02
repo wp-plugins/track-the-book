@@ -88,3 +88,12 @@ http://your/wordpress/site/?view=trackthebook.kml&book=<?php echo $_GET['book'];
 
 1. An example of the Track The Book plugin in action at Howard County Library.
 
+== Changelog ==
+
+= 1.3 =
+* Added dashboard statistics
+* Added the ability to download a CSV file of all the data
+* Added the ability to add a filters box and filter the map by a specific book
+* Added a shortcode for the KML address [trackthebook_kml]
+* Fixed several strings that were not internationalized
+
