@@ -18,6 +18,7 @@ $headings[] = "location";
 $headings[] = "coords";
 $headings[] = "email";
 $headings[] = "school";
+$headings[] = "grade";
 $headings[] = "ip_address";
 $headings[] = "date_added";
 
