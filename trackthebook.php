@@ -4,7 +4,7 @@ Plugin Name: Track The Book
 Plugin URI: http://www.hclibrary.org/trackthebook
 Description: Allows visitors to manually enter their location and book number. A KML file is dynamically generated and can be displayed in a map using a WordPress plugin like XML Google Maps.
 Author: Howard County Library
-Version: 1.0
+Version: 1.3
 Author URI: http://www.hclibrary.org
 */
 
@@ -45,7 +45,7 @@ define( 'TTB_BASEFOLDER', plugin_basename( dirname( __FILE__ ) ) );
 define('TTB_URL', get_option('siteurl').'/wp-content/plugins/' . TTB_BASEFOLDER);
 
 // Define database version
-define ("TTB_DB_VERSION","1.0");
+define ("TTB_DB_VERSION","1.3");
 
 // Define date format
 define ("TTB_DATE_FORMAT","m/d/y");
@@ -204,8 +204,21 @@ if (!class_exists("TrackTheBook")) {
 		
 		/**
 		 * Replace all instances of [trackthebook_kml] with the dynamic KML address
+		 * This function handles any use of the shortcode in posts/pages.
 		 */
-		function kmlUrl($content) {
+		function kmlUrlInContent($content) {
+			$kml_url = $this->kmlUrl();
+			
+			$content = preg_replace('#\[trackthebook_kml\]#i', $kml_url, $content);
+			
+			return $content;
+		}
+		
+		/**
+		 * Replace all instances of [trackthebook_kml] with the dynamic KML address
+		 * This function handles any use of the shortcode in themes.
+		 */
+		function kmlUrl() {
 			$kml_url = get_option('siteurl') . '/?view=trackthebook.kml';
 			
 			// Get filters
@@ -217,9 +230,7 @@ if (!class_exists("TrackTheBook")) {
 			// Add time to insure that it does not cache the KML page
 			$kml_url .= '&nocache=' . time();
 			
-			$content = preg_replace('#\[trackthebook_kml\]#i', $kml_url, $content);
-			
-			return $content;
+			return $kml_url;
 		}
 		
 		/**
@@ -361,7 +372,8 @@ register_activation_hook(__FILE__,array($trackthebook_model,'install'));
 // Add Shortcodes
 add_shortcode( 'trackthebook', array($trackthebook_view,'shortcodeRegisterLink') );
 add_shortcode( 'trackthebook_filters', array($trackthebook_view,'shortcodeFilters') );
-add_filter('the_content', array($trackthebook,'kmlUrl'), 1); // Add a special exception for generating the KML url in a fashion that will work with other shortcodes
+add_filter('the_content', array($trackthebook,'kmlUrlInContent'), 1); // Add a special exception for generating the KML url in a fashion that will work with other shortcodes
+add_shortcode( 'trackthebook_kml', array($trackthebook,'kmlUrl') );
 
 // Admin Hooks
 add_action('admin_menu', array($trackthebook_admin,'adminMenu'));
