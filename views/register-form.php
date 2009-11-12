@@ -1,3 +1,9 @@
+<script type="text/javascript">
+// Prevent direct access to this page and have it automatically popup the register form
+if (typeof jQuery == 'undefined') { 
+	window.location = '<?php echo get_option('siteurl'); ?>/?register=true';
+}
+</script>
 <style type="text/css" media="screen">
 .trackthebook h2 {
 	margin-top: 5px;
@@ -158,7 +164,13 @@ jQuery(document).ready(function(){
 					jQuery("#TB_closeWindowButton,#TB_overlay,#TB_ImageOff").unbind("click");
 					jQuery("#TB_closeWindowButton,#TB_overlay,#TB_ImageOff,#TTB_close").bind("click", function() {
 						closeWindow();
-						window.location.reload(1);
+						// This will prevent the form automatically popping up a second time when form is submitted
+						if (typeof(TTB_AUTOLAUNCH) !== 'undefined') {
+							window.location = '<?php echo get_option('siteurl'); ?>';
+						}
+						else {
+							window.location.reload(1);
+						}
 						});
 	
 					return true;

@@ -21,7 +21,7 @@ $trackthebook_model = new TrackTheBookModel;
 	<div id="filter_container">
 		<div id="filters">
 			<h3><?php _e('Filter by'); ?></h3>
-			<form id="trackthebook_register" method="get" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
+			<form id="trackthebook_filter" method="get" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
 			<input type="hidden" name="page_id" id="page_id" value="<?php echo $_GET['page_id']; ?>" />
 			<table>
 				<tr>

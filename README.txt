@@ -3,7 +3,7 @@ Contributors: dbouman
 Tags: track the book, google, maps, kml, books, books, locations
 Requires at least: 2.5
 Tested up to: 2.8.4
-Stable tag: 1.3.1
+Stable tag: 1.3.3
 
 Creates a dynamic KML file of book numbers and locations that were entered by visitors.
 
@@ -89,6 +89,10 @@ http://your/wordpress/site/?view=trackthebook.kml&book=<?php echo $_GET['book'];
 1. An example of the Track The Book plugin in action at Howard County Library.
 
 == Changelog ==
+
+= 1.3.3 =
+* Fixed incorrect name of the filters form
+* Added a feature to automatically launch the registration form when someone tries to access the page directly
 
 = 1.3.1 =
 * Fixed missing column in the CSV export

@@ -46,7 +46,7 @@ if (!class_exists("TrackTheBookView")) {
 			}
 			
 			if ($trackthebook->checkGoogleAPIKey()) {
-				$register_link = "<a class='thickbox' target='_blank' href='" . get_option('siteurl'). "?view=trackthebook_form&amp;width=560&amp;height=350'>" . $content . "</a>";
+				$register_link = "<a class='thickbox' target='_blank' href='" . get_option('siteurl'). "?view=trackthebook_form&amp;width=560&amp;height=360'>" . $content . "</a>";
 			}
 			else {
 				$register_link = __('You must specify a Google Maps API Key before you can use the Track The Book plugin!');

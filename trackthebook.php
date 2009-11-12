@@ -4,7 +4,7 @@ Plugin Name: Track The Book
 Plugin URI: http://wordpress.org/extend/plugins/track-the-book/
 Description: Allows visitors to manually enter their location and book number. A KML file is dynamically generated and can be displayed in a map using a WordPress plugin like XML Google Maps.
 Author: Howard County Library
-Version: 1.3.1
+Version: 1.3.3
 Author URI: http://www.hclibrary.org
 */
 
@@ -45,7 +45,7 @@ define( 'TTB_BASEFOLDER', plugin_basename( dirname( __FILE__ ) ) );
 define('TTB_URL', get_option('siteurl').'/wp-content/plugins/' . TTB_BASEFOLDER);
 
 // Define database version
-define ("TTB_DB_VERSION","1.3.1");
+define ("TTB_DB_VERSION","1.3.3");
 
 // Define date format
 define ("TTB_DATE_FORMAT","m/d/y");
@@ -321,6 +321,9 @@ wp_enqueue_script('jquery');
 wp_enqueue_script('thickbox');
 wp_enqueue_script('jquery-form');
 wp_enqueue_script('jquery-validate', TTB_URL.'/js/jquery.validate.min.js', array('jquery'));
+if ($_GET['register'] == 'true') {
+	wp_enqueue_script('auto-popup-form', TTB_URL.'/js/autopopupform.js', array('jquery','thickbox'));
+}
 
 // Create custom views and ajax actions
 if($_GET['view'] === 'trackthebook_form'){
